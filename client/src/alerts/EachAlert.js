@@ -44,11 +44,11 @@ export default function EachAlert({ alert, fetchData }) {
         <div className="bg-slate-100 rounded-lg mb-4 p-4 hover:border hover:border-purple-700">
             <div>
                 <div>
-                    <div className="font-medium">{alert.name}</div>
-                    <div className="text-slate-400">{alert.email}</div>
+                    <div className="font-medium">{alert.type}</div>
+                    <div className="text-slate-400">{alert.description}</div>
                 </div>
                 <div className="text-sm flex space-x-4 mt-4">
-                    <Link to={`/profile/${alert.ID}`}>View Profile</Link>
+                    <Link to={`/alert/${alert.ID}`}>View Alert</Link>
                     <button onClick={openModal} >Edit</button>
                     <button onClick={deleteAlert} className="text-red-600">Delete</button>
                 </div>

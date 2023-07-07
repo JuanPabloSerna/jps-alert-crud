@@ -13,7 +13,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route index element={<List />} />
-        <Route path="/profile/:id" element={<ViewAlert />} />
+        <Route path="/alert/:id" element={<ViewAlert />} />
       </Routes>
     </Router>
   );

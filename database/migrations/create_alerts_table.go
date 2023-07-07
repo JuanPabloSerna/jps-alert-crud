@@ -8,9 +8,9 @@ import (
 
 type Alerts struct {
 	ID          uint      `gorm:"primary key;autoIncrement" json: "id"`
-	Type        *string   `json:"name"`
-	Description *string   `json:"email"`
-	Created     time.Time `json:"date"`
+	Type        *string   `json:"type"`
+	Description *string   `json:"description"`
+	Created     time.Time `json:"created"`
 	Country     *string   `json:"country"`
 }
 
