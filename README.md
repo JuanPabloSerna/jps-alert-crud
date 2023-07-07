@@ -18,48 +18,53 @@ El type nunca cambia y como deseable, el product owner solicitó que se pueda ac
 
 Del lado de la api, aparte de poder consultar los eventos, es necesario también tener un endpoint que a modo de métrica/estadística te liste los 3 países con la mayor cantidad de eventos en el último mes, junto con un valor entero que especifique esa cantidad.
 
+# APP UI
+
+![alt text](./documentation/appui.PNG?raw=true "App UI")
+
 # Technologies
-    * Go lang
+    * Go lang, Javascript, HTML, CSS
     * GORM (ORM: defines structs which have methods for storing and finding the entity from database)
+    * Fiber: is an Express inspired web framework built on top of Fasthttp, the fastest HTTP engine for Go
+    * Gin Gonic is a high-performant web framework written in Go (Golang)
     * PostgreSQL Database (pgAdmin)
     * JSON (json objects)
     * REST API's
     * HTTP, HTTPS
-    * Sonarqube (continuous inspection of code quality) (http://localhost:9000/projects) and install plugin sonarlint in your IDE
-    (After config proyect, execute the command: clean org.jacoco:jacoco-maven-plugin:prepare-agent install)
-    And each update execute: sonar:sonar -Dsonar.login=9feb9fcf40d00ce1aa1faf7529966d68e7b1000a
+    * ReactJS, react-router, axios (consume REST API's), moment (utils library to format), Jest (unit test)
     * Docker (is an open platform for developing, shipping, and running applications, enables you to 
     separate your applications from your infrastructure)
     
 
 # Architecture
+
+  MVC Architecture: Webapp (PWA)
+
    ## Package Diagram
-  ![alt text](./documentation/PackageDiagram.jpg?raw=true "Package Diagram")
+  ![alt text](./documentation/PackageDiagram.png?raw=true "Package Diagram")
   
-    * config: Is to make all settings of the microservice, how to configure the api with spring security so that non-validated or identified users do not access it, JWT configuration, define the number of transactions per day, condfiguration documentation and consumption of the CAD api.
-    * security: Manage security within the entire microservice, in this microservice we are using spring security with JWT and for example in this package we generate and validate the authentication token
+  Backend:
+
+    * migrations: Create the table in the database when I run go
     * controller: Definition of API endpoints and access to them, in addition to their configuration.
-    * dto: Data transfer object and its objective is to separate the api from the database, because if the model changes, it does not affect the api (POJO classes).
-    * error: Contains the parameterized errors in the application of which we already know why they happen.
-    * exception: Handle exceptions within the entire microservice depending on whether they are handled or unhandled exceptions.
-    * model: Mapping of the database tables (POJO classes: classes that have get, sets, constructors... (encapsulation) ).
-    * repository: It is the connection to the database, they also call this repositories (they call the classes that connect to the database), 
-    use pattern DAO.
-    * service: Interfaces used by controllers to perform operations such as insert, delete, query, update, perform certain functionality.
-    * service.impl: Is the implementation of the services interfaces, this to isolate the definition of the implementation.
+    * models: Mapping of the database tables like alerts.
+    * repository: It is the connection to the database, they also call this repositories (they call the structs that connect to the database), use pattern DAO.
+    * routes: Setup API's routes (get, post, delete, put) with fiber and use repository.
+    * storage: Database configuration like dbname, password, port, host, user, among others... (use Postgres driver).
+    * bootstrap: setup environment variables, database and fiber configurations
+
+  Frontend:
+
+     * alerts: app views to management alerts like: show, create, delete and update alerts
 
 # Database
+
+  Database Name: go_crud
+
   ## Entity Relationship Diagram
   ![alt text](./documentation/EntityRelationshipDiagramCore.PNG?raw=true "Entity Relationship Diagram Core")
 
-    * account: Table save the accounts of clients
-    * movements: Table save the transactions of clients
-
-  ![alt text](./documentation/EntityRelationshipDiagramSecurity.PNG?raw=true "Entity Relationship Diagram Security")
-
-    * users: Table save the users of microservice
-    * roles: Table save the roles of microservice
-    * user_roles: Detail table save the user with role of microservice
+    * alerts: Table save the app alerts
 
 # Deploy
 ## Docker
@@ -76,4 +81,21 @@ docker run -it -p 8080:8080 midocker
 
 # Utils
 ## Postman Requests
-Import request for test apis, path: FundsTransfers/documentation/Postman Requests/FundsTranfers.postman_collection
+Import request for test apis, path: jps-alert-crud/documentation/Postman Requests/Alerts.postman_collection
+
+
+# Run the app
+## 1) run go (Backend)
+Path: /jps-alert-crud/ 
+Command: go run main.go
+
+![alt text](./documentation/gorunning.PNG?raw=true "Go Command Running")
+
+## 2) run react (Frontend)
+Path: /jps-alert-crud/client/
+Command: npm install
+
+Path: /jps-alert-crud/client/
+Command: npm start
+
+![alt text](./documentation/reactrunning.PNG?raw=true "React Command Running")

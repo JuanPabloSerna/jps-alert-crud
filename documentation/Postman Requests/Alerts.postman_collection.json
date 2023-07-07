@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "e7d39bc2-911f-4eb7-8f02-d1e7f0ce06c2",
+		"name": "Alerts",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://127.0.0.1:8080/api/alerts?sort=-id&size=5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8080/api/alerts?sort=-id&size=5",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"alerts"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "-id"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
