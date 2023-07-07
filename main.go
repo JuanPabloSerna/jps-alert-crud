@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/codetagon/crud-go-react/bootstrap"
-	"github.com/codetagon/crud-go-react/repository"
+	"github.com/JuanPabloSerna/jps-alert-crud/bootstrap"
+	"github.com/JuanPabloSerna/jps-alert-crud/repository"
 	"github.com/gofiber/fiber/v2"
 )
-
 
 type Repository repository.Repository
 

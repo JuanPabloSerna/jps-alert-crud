@@ -4,14 +4,13 @@ import (
 	"log"
 	"os"
 
-	"github.com/codetagon/crud-go-react/database/migrations"
-	"github.com/codetagon/crud-go-react/database/storage"
-	"github.com/codetagon/crud-go-react/repository"
+	"github.com/JuanPabloSerna/jps-alert-crud/database/migrations"
+	"github.com/JuanPabloSerna/jps-alert-crud/database/storage"
+	"github.com/JuanPabloSerna/jps-alert-crud/repository"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 )
-
 
 func InitializeApp(app *fiber.App) {
 	_, ok := os.LookupEnv("APP_ENV")
