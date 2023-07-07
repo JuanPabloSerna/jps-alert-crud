@@ -89,7 +89,7 @@ Import request for test apis, path: jps-alert-crud/documentation/Postman Request
 Path: /jps-alert-crud/ 
 Command: go run main.go
 
-![alt text](./documentation/gorunning.PNG?raw=true "Go Command Running")
+![alt text](./documentation/gorunning.png?raw=true "Go Command Running")
 
 ## 2) run react (Frontend)
 Path: /jps-alert-crud/client/
@@ -98,4 +98,4 @@ Command: npm install
 Path: /jps-alert-crud/client/
 Command: npm start
 
-![alt text](./documentation/reactrunning.PNG?raw=true "React Command Running")
+![alt text](./documentation/reactrunning.png?raw=true "React Command Running")
