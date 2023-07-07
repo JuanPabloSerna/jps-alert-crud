@@ -20,7 +20,7 @@ Del lado de la api, aparte de poder consultar los eventos, es necesario también
 
 # APP UI
 
-![alt text](./documentation/appui.PNG?raw=true "App UI")
+![alt text](./documentation/appui.png?raw=true "App UI")
 
 # Technologies
     * Go lang, Javascript, HTML, CSS
