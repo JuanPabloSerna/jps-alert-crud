@@ -1,14 +1,27 @@
-FROM golang:alpine AS build
-LABEL MAINTAINER = 'Juan Pablo serna'
+# syntax=docker/dockerfile:1
 
-RUN apk add --update git
-WORKDIR /go/src/github.com/JuanPabloSerna/jps-alert-crud
-COPY . .
-RUN TAG=$(git describe --tags --abbrev=0) \
-    && LDFLAGS=$(echo "-s -w -X main.version="$TAG) \
-    && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o /go/bin/jps-alert-crud -ldflags "$LDFLAGS" cmd/jps-alert-crud/main.go
+FROM golang:1.19
 
-# Building image with the binary
-FROM scratch
-COPY --from=build /go/bin/jps-alert-crud /go/bin/jps-alert-crud
-ENTRYPOINT ["/go/bin/jps-alert-crud"]
+# Set destination for COPY
+WORKDIR /app
+
+# Download Go modules
+COPY go.mod go.sum ./
+RUN go mod download
+
+# Copy the source code. Note the slash at the end, as explained in
+# https://docs.docker.com/engine/reference/builder/#copy
+COPY *.go ./
+
+# Build
+RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+
+# Optional:
+# To bind to a TCP port, runtime parameters must be supplied to the docker command.
+# But we can document in the Dockerfile what ports
+# the application is going to listen on by default.
+# https://docs.docker.com/engine/reference/builder/#expose
+EXPOSE 8080
+
+# Run
+CMD ["/docker-gs-ping"]
