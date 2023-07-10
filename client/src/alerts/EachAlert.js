@@ -72,7 +72,7 @@ export default function EachAlert({ alert, fetchData }) {
                                     <div className="px-8 py-8">
                                         <div className="mb-5">
                                             <label className="block text-gray-700 text-sm font-bold mb-2">Type</label>
-                                            <input type="text" name="type" value={typeValue} onChange={(e) => setTypeValue(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required />
+                                            <input type="text" name="type" value={typeValue} onChange={(e) => setTypeValue(e.target.value)} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" disabled />
                                         </div>
                                         <div className="mb-5">
                                             <label className="block text-gray-700 text-sm font-bold mb-2">Description</label>
