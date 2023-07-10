@@ -6,6 +6,7 @@ import { Link, useSearchParams, useNavigate } from "react-router-dom";
 
 export default function List() {
     const [alerts, setAlerts] = useState([])
+    const [alertsFiltered, setAlertsFiltered] = useState([])
     const [pages, setPages] = useState(0)
     const [searchParams, setSearchParams] = useSearchParams();
     let navigate = useNavigate();
@@ -16,17 +17,26 @@ export default function List() {
     const closeModal = () => {
         document.getElementById('new-modal').classList.add("hidden");
     }
+    const findByText = (text) => {
+        if(text !== "") {
+            setAlertsFiltered(alerts.filter((item) => item.type.includes(text) || item.description.includes(text) || item.country.includes(text)));
+        } else {
+            setAlertsFiltered(alerts)
+        }
+    }
     const fetchData = async () => {
         const page = searchParams.get("page") ? "&page=" + searchParams.get("page") : '';
         try {
             const response = await fetch(`${API_URL}/alerts?sort=-id&size=5${page}`);
             const json = await response.json();
             setAlerts(json.data.items);
+            setAlertsFiltered(json.data.items);
             setPages(json.data.total_pages)
         } catch (error) {
             console.log("error", error);
         }
     };
+
     useEffect(() => {
         fetchData();
     }, [searchParams]);
@@ -57,9 +67,9 @@ export default function List() {
                             <h1 className="font-bold">CRUD Alerts App</h1>
                             <button className="bg-purple-700 text-white px-3 py-1.5 rounded" onClick={openModal}>Add alert</button>
                         </div>
-                        <input type="search" name="busqueda" placeholder="Busca por tipo, descripción o país" className="font-bold bg-opacity-70 transition-opacity mb-5 w-full"/>
-                        <div className="">
-                            {alerts.length > 0 ? alerts.map((alert, key) => <EachAlert key={key} alert={alert} fetchData={fetchData} />) : ''}
+                        <input type="search" name="busqueda" placeholder="Busca por tipo, descripción o país" onChange={(e) => findByText(e.target.value)} className="font-bold bg-opacity-70 transition-opacity mb-5 w-full"/>
+                        <div>
+                            {alertsFiltered.length > 0 ? alertsFiltered.map((alert, key) => <EachAlert key={key} alert={alert} fetchData={fetchData} />) : 'No hay resultados en la busqueda'}
                         </div>
 
                         <div className="mt-10">
