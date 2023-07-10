@@ -57,6 +57,7 @@ export default function List() {
                             <h1 className="font-bold">CRUD Alerts App</h1>
                             <button className="bg-purple-700 text-white px-3 py-1.5 rounded" onClick={openModal}>Add alert</button>
                         </div>
+                        <input type="search" name="busqueda" placeholder="Busca por tipo, descripción o país" className="font-bold bg-opacity-70 transition-opacity mb-5 w-full"/>
                         <div className="">
                             {alerts.length > 0 ? alerts.map((alert, key) => <EachAlert key={key} alert={alert} fetchData={fetchData} />) : ''}
                         </div>
