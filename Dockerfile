@@ -1,27 +1,29 @@
-# syntax=docker/dockerfile:1
+#build stage
+FROM golang:1.20.5-alpine AS builder
+RUN apk add --no-cache git upx
 
-FROM golang:1.19
-
-# Set destination for COPY
 WORKDIR /app
 
-# Download Go modules
-COPY go.mod go.sum ./
+COPY ["go.mod", "go.sum", "./"]
 RUN go mod download
 
-# Copy the source code. Note the slash at the end, as explained in
-# https://docs.docker.com/engine/reference/builder/#copy
-COPY *.go ./
+COPY . .
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+RUN go build \
+    -ldflags="-s -w" \
+    -o app -v .
 
-# Optional:
-# To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can document in the Dockerfile what ports
-# the application is going to listen on by default.
-# https://docs.docker.com/engine/reference/builder/#expose
+RUN upx app
+
+#final stage
+FROM alpine:latest
+LABEL Name=jpsalertcrud Version=0.0.1
+RUN apk update
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /app
+COPY --from=builder /app .
+
+ENTRYPOINT ["./app"]
+
 EXPOSE 8080
-
-# Run
-CMD ["/jps-alert-crud"]

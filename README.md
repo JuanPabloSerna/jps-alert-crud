@@ -69,15 +69,17 @@ Del lado de la api, aparte de poder consultar los eventos, es necesario también
 # Deploy
 ## Docker
 Build image with the command:
-docker build -t midocker .
-(The . It is because we are located where the Dockerfile is and midocker 
+docker build -t jps-alert-crud .
+(The . It is because we are located where the Dockerfile is and jps-alert-crud 
 is the name that we are going to give the container)
 
 Check the image with the command:
 docker images
 
 And finally, execute the image with the command:
-docker run -it -p 8080:8080 midocker
+docker run --name jps-alert-crud -p 8080:8080 jps-alert-crud
+
+Tip: with upx library reduce the size of the image
 
 # Utils
 ## Postman Requests
