@@ -101,3 +101,14 @@ Path: /jps-alert-crud/client/
 Command: npm start
 
 ![alt text](./documentation/reactrunning.png?raw=true "React Command Running")
+
+# Deuda Tecnica
+  * Terminar de dockerizar la app
+  * Endpoint de métrica/estadística de paises
+  * Pruebas unitarias back(testify) y front (React Testing Library & Jest)
+  * Frontend: Install Eslint, prettier, Husky And Airbnb Guidestyle (Static testing), SonarQube (Code Quality, Static testing), ENV (Environment Variables), Organizar elementos y aplicar OOCSS, BEM, SMACSS (Methologies In Your Styles), Developing Components in Isolation with Storybook (Visual Testing & Accessibility Testing & Documentation), Cypress (E2E Testing)
+  * Implementar una estrategia de versionamiento de codigo, por ejemplo gitflow
+  * Hacer un diagrama de despliegue en la nube (Cloud, ambientes dev, qa y producción)
+  * Aplicar devops (Jenkins, crear pipeline)
+  * Hacer las historias de usuarios en Jira y aplicar una metodologia agil como scrum
+  * Hacer scripts para la base de datos con datos de prueba (flyway)
